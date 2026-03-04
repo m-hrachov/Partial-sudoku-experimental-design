@@ -50,10 +50,10 @@ If the setting with non-rectangular blocks is chosen (e.g., `treatments = 21`, `
 In this case, you would fit a model with column effect as a factor and optionally include a row effect as a continuous trend. The model can be written as
 
 $$
-y_{ij} = \mu + a_t + c_i + \beta * j + e_{ij}
+y_{ij} = \mu + a_{t(i,j)} + c_i + \beta * j + e_{ij}
 $$
 
-where $y_{ij}$ is the response for the plot in column $i$ and row $j$, $\mu$ is the overall mean (intercept), $a_t$ is the effect of treatment $t$ assigned to that plot, $c_i$ is the effect of column $i$, $\beta * j$ represents a numeric gradient effect over rows, and $e_{ij}$ is the residual error.
+where $y_{ij}$ is the response for the plot in column $i$ and row $j$, $\mu$ is the overall mean (intercept), $a_{t(i,j)}$ is the effect of treatment $t$ assigned to that plot, $c_i$ is the effect of column $i$, $\beta * j$ represents a numeric gradient effect over rows, and $e_{ij}$ is the residual error.
 
 This design evaluation is equivalent to saying that replicates are placed over columns, but not over rows. The "blocks" over rows serve only to ensure that the same treatment does not appear repeatedly in the same part of the field or greenhouse. In theory, this makes the design more robust than randomizing only over columns.
 
