@@ -22,7 +22,7 @@
 ##                    Here you can see that number of blocks indexed with k is smaller than number of rows. 
 ##                    This design than has a complete replicate in each column, and each "block" is also a complete replicate.
 ##
-##                    If the setting with non-rectangular blocks is chosen (e.g., treatments = 21, reps = 3), you cannot model block effect.
+##                    If the setting with non-rectangular blocks is chosen (e.g., treatments = 21, reps = 4), you cannot model block effect.
 ##                    In this case you would fit a model with column effect as factor. You can add a row effect as a continuous trend.
 ##                    This means: y_ij = mu + a_t + c_i + beta*j + e_ij, where y_ij is the response for the i-j-th plot, mu is the overall mean (intercept), 
 ##                    c_i is the effect of column i, beta*j is the numeric gradient effect, and e_ij is the residual error.
@@ -224,4 +224,5 @@ if(alignment == "vertical"){
       plot.title         = element_text(hjust = 0.5) 
     )
 }
+
 
