@@ -1,7 +1,7 @@
 # Partial sudoku plot randomization
 
-**Description**: Partial sudoku randomization function to create experimental design for a greenhouse table or a field. This design is in-between of RCBD and row-column, so that
-              every column and every 'block' contain a complete replicate. 
+**Description**: Partial sudoku randomization function to create experimental design for a greenhouse table or a field. This design is in-between of an RCBD and a row-column design, so that
+              every column and every rectangular block contain a complete replicate (each treatment occures once). 
               This design can help to account for gradients in both X and Y directions.
 
 **Creator**: m-hrachov
@@ -13,11 +13,11 @@
 
 # Warning 
 
-This code implementation allows rectangualr and non-rectangular blocks.
+This code implementation allows rectangular blocks and "non-rectangular blocks", the latter acting only as a randomization constraint, a restriction.
 It is highly recommended to choose the setting with rectangular blocks, because it is easier to analyse and to interpret. 
 
-The setting with non-rectangular blocks (e.g. `allignment="vertical"`, `reps=4`, `treatments=21`) can be a bit tricky to analyse and to explain the choice of this randomization.
-In such case, the "non-rectangular blocks" are not blocks, but "constraints" to ensure that you don't have the same treatment in the same part of the field or greenhouse.
+The setting with "non-rectangular blocks" (e.g. `alignment="vertical"`, `reps=4`, `treatments=21`) can be a bit tricky to analyse and to explain the choice of this randomization.
+In such case, the "non-rectangular blocks" are not blocks, but are constraints to ensure that you don't have the same treatment in the same part of the field or greenhouse.
 This is a bit more robust than only randomizing over columns, but you cannot model block effect in a usual way.
 
           
@@ -43,9 +43,9 @@ The total number of blocks $K$, indexed by $k$, is smaller than the number of ro
 
 <img width="517" height="320" alt="grafik" src="https://github.com/user-attachments/assets/14749c87-424f-47c7-8262-f891fb740704" />
 
-## Non-rectangular blocks
+## Non-rectangular blocks, i.e. constrained design
 
-If the setting with non-rectangular blocks is chosen (e.g., `treatments = 21`, `reps = 4`), you cannot model a block effect.
+If the setting with "non-rectangular blocks" is chosen (e.g., `treatments = 21`, `reps = 4`), you cannot model a block effect.
 
 In this case, you would fit a model with column effect as a factor and optionally include a row effect as a continuous trend. The model can be written as
 
