@@ -16,20 +16,20 @@
 ##                    If you chose your blocks to be rectangular, then you can model block effect, and the design is more similar to a row-column design, 
 ##                    but with fewer blocks - this is much more preferred.
 ##                    Taking this example, alignment "vertical", X=4, Y=20.
-##                    In this case, y_ij = mu + c_i + b_k + e_ij, where y_ij is the response for the i-j-th plot, c_i is the effect of column i, 
+##                    In this case, the basic model would be y_ij = mu + a_t(i,j) + c_i + b_k + e_ij, where y_ij is the plot value in i-th column and j-th row, 
+##                    mu is the overall mean (intercept), a_t(i,j) is the treatment effect assigned to the i-j-th position, c_i is the effect of the column i, 
 ##                    b_k is the effect of block k, and e_ij is the residual error.
 ##                    Here you can see that number of blocks indexed with k is smaller than number of rows. 
 ##                    This design than has a complete replicate in each column, and each "block" is also a complete replicate.
 ##
 ##                    If the setting with non-rectangular blocks is chosen (e.g., treatments = 21, reps = 3), you cannot model block effect.
 ##                    In this case you would fit a model with column effect as factor. You can add a row effect as a continuous trend.
-##                    This means: y_ij = mu + c_i + r_j + e_ij, where y_ij is the response for the i-j-th plot,c_i is the effect of column i, 
-##                    r_j is the effect of row j, and e_ij is the residual error.
+##                    This means: y_ij = mu + a_t + c_i + beta*j + e_ij, where y_ij is the response for the i-j-th plot, mu is the overall mean (intercept), 
+##                    c_i is the effect of column i, beta*j is the numeric gradient effect, and e_ij is the residual error.
 ##                    This design evaluation is equivalent to saying: I have place replicates over columns, but I did not place replicates over rows.
 ##                    The "blocks" over rows play solely a role of ensuring that you do not have the same treatment in the same part of the field/greenhouse.
 ##                    This should, in theory, make this design more robust than only randomizing over columns.
-##                    A significant effect gradient effect r_j over rows would say: we have some trend over rows, and (many) treatments are
-##                    affected about equally by this trend. Note that with a small number of columns, you will have less certainty in this effect's estimate.
+##                    A significant gradient effect beta over rows would say: we have some linear trend over rows 
 ##                    If the effect over rows is not significant, drop it.
 ## 
 ## Title:       Partial sudoku plot randomization
@@ -224,3 +224,4 @@ if(alignment == "vertical"){
       plot.title         = element_text(hjust = 0.5) 
     )
 }
+
