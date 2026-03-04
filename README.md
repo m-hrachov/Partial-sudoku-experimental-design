@@ -16,8 +16,8 @@
 This code implementation allows rectangualr and non-rectangular blocks.
 It is highly recommended to choose the setting with rectangular blocks, because it is easier to analyse and to interpret. 
 
-The setting with non-rectangular blocks (e.g. allignment="vertical", reps=4, treatments=21) can be a bit tricky to analyse and to explain the choice of this randomization.
-In such case, the "non-rectangular blocks" are not blocks, but "constraints" to ensure that you don't have the same treatment in the same part of the field/greenhouse.
+The setting with non-rectangular blocks (e.g. `allignment="vertical"`, `reps=4`, `treatments=21`) can be a bit tricky to analyse and to explain the choice of this randomization.
+In such case, the "non-rectangular blocks" are not blocks, but "constraints" to ensure that you don't have the same treatment in the same part of the field or greenhouse.
 This is a bit more robust than only randomizing over columns, but you cannot model block effect in a usual way.
 All in all, if you can model rectangular blocks, do it this way. 
           
@@ -33,19 +33,21 @@ In this case,
 
 $$y_{ik} = \mu + c_i + b_k + e_{ik}$$ 
 
-where $y_{ij}$ is the response for the $ij$-th plot, $c_i$ is the effect of column $i$, 
-$b_k$ is the effect of block $k$, and $e_{ik}$ is the residual plot error.
+where $y_{ij}$ is the response for the $ij$-th plot, $\mu$ is the overall intercept, $c_i$ is the effect of the $i$-th column, 
+$b_k$ is the effect of the $k$-th block, and $e_{ik}$ is the residual plot error.
 Here the total number of blocks $K$ indexed with $k$ is smaller than number of rows $R$, so that $K < R$. 
 This design than has a complete replicate in each column, and each "block" is also a complete replicate.
+
+<img width="517" height="320" alt="grafik" src="https://github.com/user-attachments/assets/14749c87-424f-47c7-8262-f891fb740704" />
 
 If the setting with non-rectangular blocks is chosen (e.g., `treatments = 21`, `reps = 3`), you cannot model block effect.
 In this case you would fit a model with column effect as factor. You can add a row effect as a continuous trend.
 This means: 
 
-$$y_{ij} = mu + c_i + r_j + e_{ij}$$ 
+$$y_{ij} = \mu + c_i + r_j + e_{ij}$$ 
 
-where $y_{ij}$ is the response for the $ij$-th plot, $c_i$ is the effect of column $i$, 
-$r_j$ is the effect of row $j$, and $e_{ij}$ is the residual error.
+where $y_{ij}$ is the response for the $ij$-th plot, $\mu$ is the overall intercept, $c_i$ is the effect of the $i$-th column, 
+$r_j$ is the effect of the $j$-th row, and $e_{ij}$ is the residual error.
 This design evaluation is equivalent to saying: I have place replicates over columns, but I did not place replicates over rows.
 The "blocks" over rows play solely a role of ensuring that you do not have the same treatment in the same part of the field/greenhouse.
 This should, in theory, make this design more robust than only randomizing over columns.
@@ -53,5 +55,6 @@ A significant effect gradient effect $r_j$ over rows would say: we have some tre
 affected about equally by this trend. Note that with a small number of columns, you will have less certainty in this effect's estimate.
 If the effect over rows is not significant, drop it.
 
-<img width="517" height="320" alt="grafik" src="https://github.com/user-attachments/assets/14749c87-424f-47c7-8262-f891fb740704" />
+<img width="517" height="320" alt="grafik" src="https://github.com/user-attachments/assets/f259067b-013f-4a41-88a4-b68f3a32fcbb" />
+
 
