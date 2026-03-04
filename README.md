@@ -19,7 +19,7 @@ It is highly recommended to choose the setting with rectangular blocks, because 
 The setting with non-rectangular blocks (e.g. `allignment="vertical"`, `reps=4`, `treatments=21`) can be a bit tricky to analyse and to explain the choice of this randomization.
 In such case, the "non-rectangular blocks" are not blocks, but "constraints" to ensure that you don't have the same treatment in the same part of the field or greenhouse.
 This is a bit more robust than only randomizing over columns, but you cannot model block effect in a usual way.
-All in all, if you can model rectangular blocks, do it this way. 
+
           
 
 # Design evaluation 
