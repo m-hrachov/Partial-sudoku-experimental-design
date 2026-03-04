@@ -24,36 +24,40 @@ All in all, if you can model rectangular blocks, do it this way.
 
 # Design evaluation 
 
-Assume that rows are your long side (Y), and columns are your short side (X), e.g. `allignment="vertical"`, `reps=4`, `treatments=20`.
-                    
-If you chose your blocks to be rectangular, then you can model block effect, and the design is more similar to a row-column design, 
-but with fewer blocks - this is much more preferred.
-Taking this example, `alignment="vertical"`, `X=4`, `Y=20`.
-In this case, 
+## Rectangular blocks
 
-$$y_{ik} = \mu + c_i + b_k + e_{ik}$$ 
+Assume that rows are your long side (Y), and columns are your short side (X), e.g. `alignment="vertical"`, `reps=4`, `treatments=20`.
 
-where $y_{ij}$ is the response for the $ij$-th plot, $\mu$ is the overall intercept, $c_i$ is the effect of the $i$-th column, 
-$b_k$ is the effect of the $k$-th block, and $e_{ik}$ is the residual plot error.
-Here the total number of blocks $K$ indexed with $k$ is smaller than number of rows $R$, so that $K < R$. 
-This design than has a complete replicate in each column, and each "block" is also a complete replicate.
+If you choose your blocks to be rectangular, you can model a block effect, making the design closer to a row–column design but with fewer blocks, which is generally preferred. 
+In this example, `alignment="vertical"`, `X=4`, and `Y=20`.
+
+Here, the basic model can be written as
+
+$$
+y_{ij} = \mu + a_{t(i,j)} + c_i + b_k + e_{ij}
+$$
+
+where $y_{ij}$ is the response for the plot located in the $i$-th column and $j$-th row, $\mu$ is the overall mean (intercept), $a_{t(i,j)}$ is the effect of the treatment assigned to position $(i,j)$, $c_i$ is the effect of the $i$-th column, $b_k$ is the effect of the $k$-th block, and $e_{ij}$ is the residual plot error.
+
+The total number of blocks $K$, indexed by $k$, is smaller than the number of rows $R$, so $K < R$. In this design, each column represents a complete replicate of all treatments, and each rectangular block also contains a complete replicate.
 
 <img width="517" height="320" alt="grafik" src="https://github.com/user-attachments/assets/14749c87-424f-47c7-8262-f891fb740704" />
 
-If the setting with non-rectangular blocks is chosen (e.g., `treatments = 21`, `reps = 3`), you cannot model block effect.
-In this case you would fit a model with column effect as factor. You can add a row effect as a continuous trend.
-This means: 
+## Non-rectangular blocks
 
-$$y_{ij} = \mu + c_i + r_j + e_{ij}$$ 
+If the setting with non-rectangular blocks is chosen (e.g., `treatments = 21`, `reps = 4`), you cannot model a block effect.
 
-where $y_{ij}$ is the response for the $ij$-th plot, $\mu$ is the overall intercept, $c_i$ is the effect of the $i$-th column, 
-$r_j$ is the effect of the $j$-th row, and $e_{ij}$ is the residual error.
-This design evaluation is equivalent to saying: I have place replicates over columns, but I did not place replicates over rows.
-The "blocks" over rows play solely a role of ensuring that you do not have the same treatment in the same part of the field/greenhouse.
-This should, in theory, make this design more robust than only randomizing over columns.
-A significant effect gradient effect $r_j$ over rows would say: we have some trend over rows, and (many) treatments are
-affected about equally by this trend. Note that with a small number of columns, you will have less certainty in this effect's estimate.
-If the effect over rows is not significant, drop it.
+In this case, you would fit a model with column effect as a factor and optionally include a row effect as a continuous trend. The model can be written as
+
+$$
+y_{ij} = \mu + a_t + c_i + \beta * j + e_{ij}
+$$
+
+where $y_{ij}$ is the response for the plot in column $i$ and row $j$, $\mu$ is the overall mean (intercept), $a_t$ is the effect of treatment $t$ assigned to that plot, $c_i$ is the effect of column $i$, $\beta * j$ represents a numeric gradient effect over rows, and $e_{ij}$ is the residual error.
+
+This design evaluation is equivalent to saying that replicates are placed over columns, but not over rows. The "blocks" over rows serve only to ensure that the same treatment does not appear repeatedly in the same part of the field or greenhouse. In theory, this makes the design more robust than randomizing only over columns.
+
+A significant gradient effect $\beta$ over rows would indicate a linear trend across rows. If the row effect is not significant, it can be removed from the model.
 
 <img width="517" height="320" alt="grafik" src="https://github.com/user-attachments/assets/f259067b-013f-4a41-88a4-b68f3a32fcbb" />
 
